@@ -1,0 +1,4 @@
+application,gen2size,gen2stringsize,gen2stringcount,gen2scanstringsize,gen2scanstringcount,gen2dupstringsize,gen2dupstringcount,note
+string,65680,12844,66,9866,33,30,1,before deduplication
+string,65680,12844,66,9866,33,0,0,after deduplication
+
