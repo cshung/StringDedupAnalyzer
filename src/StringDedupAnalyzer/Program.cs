@@ -38,7 +38,7 @@
                     int? objGen = GenerationOf(heap, obj);
                     if (objGen == 2)
                     {
-                        if (obj.Type.Name.Equals("System.String"))
+                        if (obj.Type.Name?.Equals("System.String") == true)
                         {
                             // This are all the strings in gen2, they may or may not be live, they may or may not have a gen 2 reference.
                             // This should give an idea why strings are important
@@ -52,7 +52,7 @@
                             // This happen when we see a string referenced by a gen2 object
                             if (refGen == 2)
                             {
-                                if (referencedObject.Type.Name.Equals("System.String"))
+                                if (referencedObject.Type.Name?.Equals("System.String") == true)
                                 {
                                     if (detailed)
                                     {
