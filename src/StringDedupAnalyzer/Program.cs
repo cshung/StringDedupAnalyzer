@@ -44,7 +44,7 @@
                             // This should give an idea why strings are important
                             // My prediction is that this should be a significant percentage (otherwise why bother?)
                             gen2StringCount++;
-                            gen2StringSize += obj.AsString().Length * 2;
+                            gen2StringSize += obj.AsString(int.MaxValue).Length * 2;
                         }
                         foreach (ClrObject referencedObject in obj.EnumerateReferences())
                         {
@@ -63,7 +63,7 @@
                                     // This should give an idea how much work we need to do to scan these strings
                                     // My assumption is that the majority of the work is the computing of the hash code, that why
                                     // the cost should be roughly corresponding to the total length of the strings
-                                    string referencedObjectAsString = referencedObject.AsString();
+                                    string referencedObjectAsString = referencedObject.AsString(int.MaxValue);
                                     gen2ScanStringCount++;
                                     gen2ScanStringSize += referencedObjectAsString.Length * 2;
                                     // This happen when we see a gen2 string referenced by a gen2 object
