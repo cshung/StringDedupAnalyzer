@@ -34,12 +34,7 @@ namespace Strings
             // Forcing all objects to gen 2.
             GC.Collect();
             GC.Collect();
-            Console.WriteLine("Collect the first dump");
-            Console.ReadLine();
-            // In the string deduplication prototype, this API is hijacked to perform string deduplication
-            // Therefore we should see an observable difference in the second dump
-            GC.AddMemoryPressure(10086);
-            Console.WriteLine("Collect the second dump");
+            Console.WriteLine("Collect the dump");
             Console.ReadLine();
         }
     }
@@ -65,22 +60,32 @@ Gen 2 dup string   : 30 bytes out of 1 strings
 65680,12844,66,9866,33,30,1
 ```
 
-To complete the data collection process, update your finding in [data.csv](data.csv). 
+To complete the data collection process, update your finding in [data.csv](data.csv) and [make a pull request].
 
 ## Caveats
 
-If the dump analysis failed if this exception, you might need to set the symbol path
+If the dump analysis failed if this exception:
+```
+Unhandled exception. System.IO.FileNotFoundException: Could not find matching DAC for this runtime.
+File name: 'mscordacwks_Amd64_Amd64_4.7.3468.00.dll'
+   at Microsoft.Diagnostics.Runtime.ClrInfo.CreateRuntime() in C:\Dev\clrmd\src\Microsoft.Diagnostics.Runtime\src\DataTargets\ClrInfo.cs:line 95
+   at DumpStrings.Program.Main(String[] args) in C:\Dev\StringDedupAnalyzer\src\StringDedupAnalyzer\Program.cs:line 21
+```
+
+You might need to set the symbol path (on Windows) - the symbol path is only used to obtain the data acess binary (i.e. mscordacwks* for .NET framework or mscordaccore for .NET Core)
 ```sh
-# TODO
+SET _NT_SYMBOL_PATH=https://msdl.microsoft.com/download/symbols
 ```
 
 If your dump is huge, it can take some good amount of time to process it. You can check the CPU and memory usage of the tool, it should be spinning a single thread hot and the memory should be increasing.
 
-If possible, **keep the memory dump**. The tool is still a work in progress and it won't surprise me if there are bugs. Keeping the memory dump allow us to rerun the tool as necessary.
+If possible, **keep the memory dump**. Be sure to comply with the necessary laws in your country in case the memory dump could contain customer data. The tool is still a work in progress and it won't surprise me if there are bugs. Keeping the memory dump allow us to rerun the tool as necessary. We will never request for the dump, we only wanted the statistics.
 
 # I can help more
-This is great! With a more involved contributor like you, we can experiment more. In particular, here is a prototype branch with a rudimentary string deduplication prototype implemented. It would be really nice to see it in action in real world applications.
+This is great! With a more involved contributor like you, we can experiment more. In particular, here is a prototype branch with a rudimentary string deduplication prototype implemented. It would be really nice to see it in action in real world applications. This part is still a work in progress.
 
 ```sh
 # TODO - we need an example here
 ```
+
+[make a pull request]: https://help.github.com/articles/creating-a-pull-request
