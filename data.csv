@@ -1,4 +1,4 @@
 application,gen2size,gen2stringsize,gen2stringcount,gen2scanstringsize,gen2scanstringcount,gen2dupstringsize,gen2dupstringcount,note
 string,65680,12844,66,9866,33,30,1,before deduplication
 string,65680,12844,66,9866,33,0,0,after deduplication
-
+Stack Overflow Mobile API,20481623272,2682685688,86181864,3411517306,103209992,2099367310,84041766,Initial Run
