@@ -32,7 +32,7 @@
                 return;
             }
             var strings = new Dictionary<string, ClrObject>();
-            using (DataTarget dataTarget = DataTarget.LoadCrashDump(args[0]))
+            using (DataTarget dataTarget = LoadMemoryDump(args[0]))
             {
                 ClrInfo runtimeInfo = dataTarget.ClrVersions[0];
                 ClrRuntime runtime = runtimeInfo.CreateRuntime();
@@ -55,7 +55,7 @@
                     int? objGen = GenerationOf(heap, obj);
                     if (objGen == 2)
                     {
-                        if (obj.Type.Name?.Equals("System.String") == true)
+                        if (obj.Type.IsString)
                         {
                             // This are all the strings in gen2, they may or may not be live, they may or may not have a gen 2 reference.
                             // This should give an idea why strings are important
@@ -69,7 +69,7 @@
                             // This happen when we see a string referenced by a gen2 object
                             if (refGen == 2)
                             {
-                                if (referencedObject.Type.Name?.Equals("System.String") == true)
+                                if (referencedObject.Type.IsString)
                                 {
                                     if (detailed)
                                     {
