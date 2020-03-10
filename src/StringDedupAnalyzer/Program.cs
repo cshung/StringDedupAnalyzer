@@ -1,11 +1,28 @@
-﻿namespace DumpStrings
+﻿namespace StringDedupAnalyzer
 {
     using System;
     using System.Collections.Generic;
+    using System.Runtime.InteropServices;
     using Microsoft.Diagnostics.Runtime;
 
     internal static class Program
     {
+        private static DataTarget LoadMemoryDump(string filename)
+        {
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                return DataTarget.LoadCrashDump(filename);
+            }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                return DataTarget.LoadCoreDump(filename);
+            }
+            else
+            {
+                throw new PlatformNotSupportedException("This method is not supported on this platform.");
+            }
+        }
+
         private static void Main(string[] args)
         {
             bool detailed = false;
