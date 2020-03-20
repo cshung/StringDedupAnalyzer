@@ -2,3 +2,4 @@ application,gen2size,gen2stringsize,gen2stringcount,gen2scanstringsize,gen2scans
 string,65680,12844,66,9866,33,30,1,before deduplication
 string,65680,12844,66,9866,33,0,0,after deduplication
 Stack Overflow Mobile API,20481623272,2682685688,86181864,3411517306,103209992,2099367310,84041766,Initial Run
+Illyriad Chat Server,59274144,24912274,139175,26323520,174716,7547920,68694,ASP NET Core 3.1+SignalR (<24hr uptime)
