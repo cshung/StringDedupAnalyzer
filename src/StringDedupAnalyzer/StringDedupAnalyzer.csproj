@@ -6,7 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Reference Include="Microsoft.Diagnostics.Runtime">
+      <HintPath>../../../clrmd/artifacts/bin/Microsoft.Diagnostics.Runtime/Debug/netcoreapp3.1/Microsoft.Diagnostics.Runtime.dll</HintPath>
+    </Reference>
+    <!--
     <PackageReference Include="Microsoft.Diagnostics.Runtime" Version="2.0.0-beta.20072.5" />
+    -->
   </ItemGroup>
 
 </Project>
